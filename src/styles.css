@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #050505;
+  --color-fg: #f4f4f5;
+  --color-muted: #8d8d93;
+  --color-dim: #636366;
+  --color-card: #1c1c1e;
+  --color-card-2: #141416;
+  --color-line: #2c2c2e;
+  --color-blue: #2f86f6;
+  --color-on-blue: #f5f9ff;
+  --color-orange: #f0a03a;
+  --color-on-orange: #1c1306;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --radius-card: 1.375rem;
+  --radius-pill: 1.15rem;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  html,
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+  body {
+    font-family: var(--font-sans);
+    min-height: 100dvh;
+    text-rendering: optimizeLegibility;
+  }
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    color-scheme: dark;
+  }
+  ::selection {
+    background: var(--color-blue);
+    color: var(--color-on-blue);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ken {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.07);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--glow) 55%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 22px 6px color-mix(in srgb, var(--glow) 35%, transparent);
+  }
+}
+
+@keyframes bar-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.rise {
+  animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-ken {
+  animation: ken 16s ease-in-out infinite alternate;
+}
+.fab-glow {
+  animation: pulse-glow 2.8s ease-in-out infinite;
+}
+.fab-pos {
+  position: fixed;
+  right: max(1.25rem, calc((100vw - 28rem) / 2 + 1.25rem));
+  bottom: 1.25rem;
+  z-index: 30;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .hero-ken,
+  .fab-glow,
+  .bar-in {
+    animation: none !important;
+  }
+}
